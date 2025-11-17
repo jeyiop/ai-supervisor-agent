@@ -1,0 +1,53 @@
+{
+  "name": "ai-supervisor-agent",
+  "version": "1.0.0",
+  "description": "Agent AI Desktop multi-modèles avec interface unifiée",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux"
+  },
+  "keywords": ["ai", "electron", "n8n", "chatgpt", "claude", "perplexity", "gemini", "notion"],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "electron-store": "^8.1.0",
+    "ws": "^8.14.0",
+    "clipboardy": "^4.0.0",
+    "node-notifier": "^10.0.1",
+    "systeminformation": "^5.21.0"
+  },
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4"
+  },
+  "build": {
+    "appId": "com.aisupervisor.agent",
+    "productName": "AI Supervisor",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    }
+  }
+}
