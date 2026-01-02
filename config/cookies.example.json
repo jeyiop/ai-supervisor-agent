@@ -1,0 +1,28 @@
+{
+  "_comment": "NE PAS PARTAGER CE FICHIER - Contient vos cookies de session",
+
+  "chatgpt": {
+    "cookie_name": "__Secure-next-auth.session-token",
+    "value": "VOTRE_COOKIE_ICI"
+  },
+
+  "claude": {
+    "cookie_name": "sessionKey",
+    "value": "VOTRE_COOKIE_ICI"
+  },
+
+  "perplexity": {
+    "cookie_name": "__Secure-pplx-session",
+    "value": "VOTRE_COOKIE_ICI"
+  },
+
+  "gemini": {
+    "cookie_name": "__Secure-1PSID",
+    "value": "VOTRE_COOKIE_ICI"
+  },
+
+  "notion": {
+    "cookie_name": "token_v2",
+    "value": "VOTRE_COOKIE_ICI"
+  }
+}

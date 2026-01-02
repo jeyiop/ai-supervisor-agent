@@ -1,0 +1,46 @@
+# ============================================
+# AI Supervisor Agent - Fichiers à ignorer
+# ============================================
+
+# ----- SECURITE (NE JAMAIS COMMITER) -----
+# Cookies et sessions (contiennent vos identifiants)
+config/cookies.json
+config/sessions.json
+.env
+.env.local
+.env.*.local
+
+# ----- DEPENDANCES -----
+node_modules/
+package-lock.json
+yarn.lock
+
+# ----- BUILD -----
+dist/
+build/
+out/
+
+# ----- LOGS -----
+logs/
+*.log
+npm-debug.log*
+
+# ----- SYSTEME -----
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ----- EDITEURS -----
+.vscode/
+.idea/
+*.sublime-*
+
+# ----- ELECTRON -----
+*.asar
+
+# ----- TEMPORAIRES -----
+tmp/
+temp/
+.cache/
