@@ -1,0 +1,22 @@
+{
+  "chatgpt": {
+    "enabled": true,
+    "url": "https://chat.openai.com"
+  },
+  "claude": {
+    "enabled": true,
+    "url": "https://claude.ai"
+  },
+  "perplexity": {
+    "enabled": true,
+    "url": "https://www.perplexity.ai"
+  },
+  "gemini": {
+    "enabled": true,
+    "url": "https://gemini.google.com"
+  },
+  "notion": {
+    "enabled": true,
+    "url": "https://www.notion.so"
+  }
+}

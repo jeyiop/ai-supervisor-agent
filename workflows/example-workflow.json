@@ -1,0 +1,9 @@
+{
+  "_comment": "Exemple de workflow n8n - A importer dans n8n",
+  "name": "AI Supervisor - Exemple",
+  "nodes": [],
+  "connections": {},
+  "active": false,
+  "settings": {},
+  "id": "1"
+}

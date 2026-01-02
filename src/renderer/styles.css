@@ -1,0 +1,41 @@
+/**
+ * Styles de l'interface AI Supervisor
+ *
+ * A FAIRE:
+ * - Design du dashboard principal
+ * - Panneau de chat
+ * - Sélecteur de modèle IA
+ * - Thème sombre/clair
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #1a1a2e;
+    color: #eee;
+}
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    padding: 1rem 2rem;
+    background: #16213e;
+    border-bottom: 1px solid #0f3460;
+}
+
+main {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
