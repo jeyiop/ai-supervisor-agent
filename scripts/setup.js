@@ -1,33 +1,77 @@
 #!/usr/bin/env node
-// Script d'installation automatique - AI Supervisor Agent
+/**
+ * Script de configuration - AI Supervisor Agent
+ * Prépare l'environnement pour le premier lancement
+ */
+
 const fs = require('fs');
 const path = require('path');
 
-console.log('🚀 Installation AI Supervisor Agent - MCP Architecture');
-console.log('='.repeat(60));
+console.log('\n🚀 Configuration AI Supervisor Agent');
+console.log('='.repeat(50));
 
-// Créer la structure de dossiers
+// Structure des dossiers
 const dirs = [
-  'scripts',
-  'mcp-servers',
-  'src',
-  'src/renderer',
-  'src/mcp',
-  'config',
-  'assets'
+    'src/renderer',
+    'src/mcp',
+    'mcp-servers',
+    'config',
+    'assets/icons',
+    'docs',
+    'workflows'
 ];
 
-console.log('\n📁 Création de la structure de dossiers...');
+console.log('\n📁 Vérification de la structure...');
 dirs.forEach(dir => {
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-    console.log(`  ✓ ${dir}/`);
-  }
+    const fullPath = path.join(__dirname, '..', dir);
+    if (!fs.existsSync(fullPath)) {
+        fs.mkdirSync(fullPath, { recursive: true });
+        console.log(`   ✓ Créé: ${dir}/`);
+    } else {
+        console.log(`   ✓ Existe: ${dir}/`);
+    }
 });
 
-console.log('\n✅ Installation terminée!');
+// Créer les fichiers de config si nécessaires
+const configFiles = [
+    {
+        path: 'config/cookies.json',
+        template: 'config/cookies.example.json'
+    },
+    {
+        path: 'config/sessions.json',
+        template: 'config/sessions.example.json'
+    }
+];
+
+console.log('\n⚙️  Fichiers de configuration...');
+configFiles.forEach(({ path: filePath, template }) => {
+    const fullPath = path.join(__dirname, '..', filePath);
+    const templatePath = path.join(__dirname, '..', template);
+
+    if (!fs.existsSync(fullPath) && fs.existsSync(templatePath)) {
+        fs.copyFileSync(templatePath, fullPath);
+        console.log(`   ✓ Créé: ${filePath}`);
+    } else if (fs.existsSync(fullPath)) {
+        console.log(`   ✓ Existe: ${filePath}`);
+    }
+});
+
+// Instructions finales
+console.log('\n✅ Configuration terminée!');
 console.log('\n📝 Prochaines étapes:');
-console.log('  1. npm install');
-console.log('  2. node scripts/extract-sessions.js');
-console.log('  3. npm run start:mcp-servers');
-console.log('  4. npm run dev');
+console.log('-'.repeat(50));
+console.log('1. Installer les dépendances:');
+console.log('   npm install');
+console.log('');
+console.log('2. Extraire vos cookies de session:');
+console.log('   npm run extract-cookies');
+console.log('');
+console.log('3. Démarrer les serveurs MCP:');
+console.log('   npm run mcp:all');
+console.log('');
+console.log('4. Lancer l\'application:');
+console.log('   npm run dev');
+console.log('');
+console.log('Pour plus d\'infos, consultez README.md');
+console.log('');

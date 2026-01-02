@@ -1,18 +1,25 @@
 /**
  * Serveur MCP - Gemini
  * Port: 3004
- *
- * Ce serveur permet de communiquer avec Gemini
- * en utilisant vos cookies de session.
- *
- * A FAIRE:
- * - Récupérer les cookies depuis config/cookies.json
- * - Envoyer des requêtes à Gemini
- * - Retourner les réponses via MCP
  */
 
-const PORT = 3004;
+const MCPServer = require('./base-server');
 
-console.log(`MCP Server Gemini - Port ${PORT}`);
+class GeminiServer extends MCPServer {
+    constructor() {
+        super('Gemini', 3004);
+    }
 
-// TODO: Implémenter le serveur MCP
+    async sendToAI(message) {
+        if (!this.cookies || !this.cookies.value) {
+            return `[Gemini - Mode démo]\n\nVotre message: "${message}"\n\nPour utiliser le vrai Gemini:\n1. Connectez-vous sur gemini.google.com\n2. Exécutez: node scripts/extract-sessions.js`;
+        }
+
+        // TODO: Implémenter l'appel réel à Gemini via Puppeteer
+        return `[Gemini] Réponse simulée pour: "${message}"`;
+    }
+}
+
+// Démarrer le serveur
+const server = new GeminiServer();
+server.start();

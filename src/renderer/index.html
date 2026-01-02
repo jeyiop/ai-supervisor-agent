@@ -3,19 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
     <title>AI Supervisor</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="app">
-        <header>
-            <h1>AI Supervisor</h1>
-        </header>
+        <!-- Barre latérale -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>AI Supervisor</h1>
+            </div>
 
-        <main>
-            <!-- Interface à développer -->
-            <p>Interface en cours de développement...</p>
+            <!-- Sélecteur de modèle -->
+            <div class="model-selector">
+                <button class="model-btn active" data-model="chatgpt">
+                    <span class="model-icon">G</span>
+                    <span class="model-name">ChatGPT</span>
+                </button>
+                <button class="model-btn" data-model="claude">
+                    <span class="model-icon">C</span>
+                    <span class="model-name">Claude</span>
+                </button>
+                <button class="model-btn" data-model="perplexity">
+                    <span class="model-icon">P</span>
+                    <span class="model-name">Perplexity</span>
+                </button>
+                <button class="model-btn" data-model="gemini">
+                    <span class="model-icon">G</span>
+                    <span class="model-name">Gemini</span>
+                </button>
+            </div>
+
+            <!-- Historique -->
+            <div class="history-section">
+                <h3>Historique</h3>
+                <div id="history-list" class="history-list">
+                    <!-- Rempli par JavaScript -->
+                </div>
+            </div>
+
+            <!-- Paramètres -->
+            <div class="sidebar-footer">
+                <button id="settings-btn" class="settings-btn">
+                    Paramètres
+                </button>
+            </div>
+        </aside>
+
+        <!-- Zone principale -->
+        <main class="main-content">
+            <!-- En-tête du chat -->
+            <header class="chat-header">
+                <div class="current-model">
+                    <span id="current-model-icon" class="model-icon">G</span>
+                    <span id="current-model-name">ChatGPT</span>
+                </div>
+                <div class="header-actions">
+                    <button id="new-chat-btn" class="action-btn">Nouveau chat</button>
+                    <button id="compare-btn" class="action-btn">Comparer</button>
+                </div>
+            </header>
+
+            <!-- Messages -->
+            <div id="messages" class="messages-container">
+                <div class="welcome-message">
+                    <h2>Bienvenue dans AI Supervisor</h2>
+                    <p>Sélectionnez un modèle et commencez à discuter.</p>
+                    <div class="quick-actions">
+                        <button class="quick-btn" data-prompt="Explique-moi un concept simplement">
+                            Expliquer un concept
+                        </button>
+                        <button class="quick-btn" data-prompt="Aide-moi à rédiger un texte">
+                            Rédiger un texte
+                        </button>
+                        <button class="quick-btn" data-prompt="Analyse ce document">
+                            Analyser un document
+                        </button>
+                        <button class="quick-btn" data-prompt="Traduis ce texte">
+                            Traduire
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zone de saisie -->
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <textarea
+                        id="message-input"
+                        placeholder="Écrivez votre message..."
+                        rows="1"
+                    ></textarea>
+                    <button id="send-btn" class="send-btn" disabled>
+                        Envoyer
+                    </button>
+                </div>
+                <div class="input-info">
+                    <span id="char-count">0 caractères</span>
+                    <span class="separator">|</span>
+                    <span id="status">Prêt</span>
+                </div>
+            </div>
         </main>
+
+        <!-- Modal Paramètres -->
+        <div id="settings-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Paramètres</h2>
+                    <button id="close-settings" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="setting-group">
+                        <label>Modèle par défaut</label>
+                        <select id="default-model">
+                            <option value="chatgpt">ChatGPT</option>
+                            <option value="claude">Claude</option>
+                            <option value="perplexity">Perplexity</option>
+                            <option value="gemini">Gemini</option>
+                        </select>
+                    </div>
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="auto-save-notion">
+                            Sauvegarder automatiquement dans Notion
+                        </label>
+                    </div>
+                    <div class="setting-group">
+                        <label>Thème</label>
+                        <select id="theme-select">
+                            <option value="dark">Sombre</option>
+                            <option value="light">Clair</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="save-settings" class="primary-btn">Sauvegarder</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Comparaison -->
+        <div id="compare-modal" class="modal hidden">
+            <div class="modal-content modal-large">
+                <div class="modal-header">
+                    <h2>Comparer les réponses</h2>
+                    <button id="close-compare" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body compare-grid">
+                    <div class="compare-column" data-model="chatgpt">
+                        <h3>ChatGPT</h3>
+                        <div class="compare-response"></div>
+                    </div>
+                    <div class="compare-column" data-model="claude">
+                        <h3>Claude</h3>
+                        <div class="compare-response"></div>
+                    </div>
+                    <div class="compare-column" data-model="perplexity">
+                        <h3>Perplexity</h3>
+                        <div class="compare-response"></div>
+                    </div>
+                    <div class="compare-column" data-model="gemini">
+                        <h3>Gemini</h3>
+                        <div class="compare-response"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <textarea id="compare-input" placeholder="Posez une question à tous les modèles..."></textarea>
+                    <button id="send-compare" class="primary-btn">Envoyer à tous</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="dashboard.js"></script>
